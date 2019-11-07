@@ -5,9 +5,13 @@
         <group>
             <file>file:/C:/Users/LABORATORIO%2001/Desktop/projeto-CRUD_POO/ProjetoCRUD/src/univs/edu/telas/TelaUsuario.java</file>
             <file>file:/C:/Users/LABORATORIO%2001/Desktop/projeto-CRUD_POO/ProjetoCRUD/src/univs/edu/telas/TelaAutenticacao.java</file>
+            <file>file:/C:/Users/LABORATORIO%2001/Desktop/projeto-CRUD_POO/ProjetoCRUD/src/univs/edu/funcionario/Funcionario.java</file>
             <file>file:/C:/Users/LABORATORIO%2001/Desktop/projeto-CRUD_POO/ProjetoCRUD/src/univs/edu/telas/MenuPrincipal.java</file>
             <file>file:/C:/Users/LABORATORIO%2001/Desktop/projeto-CRUD_POO/ProjetoCRUD/src/univs/edu/telas/TelaPesquisaUsuario.java</file>
+            <file>file:/C:/Users/LABORATORIO%2001/Desktop/projeto-CRUD_POO/ProjetoCRUD/src/univs/edu/funcionario/FuncionarioTableModel.java</file>
+            <file>file:/C:/Users/LABORATORIO%2001/Desktop/projeto-CRUD_POO/ProjetoCRUD/src/hibernate.cfg.xml</file>
             <file>file:/C:/Users/LABORATORIO%2001/Desktop/projeto-CRUD_POO/ProjetoCRUD/src/univs/edu/usuario/UsuarioDAO.java</file>
+            <file>file:/C:/Users/LABORATORIO%2001/Desktop/projeto-CRUD_POO/ProjetoCRUD/src/univs/edu/funcionario/FuncionarioDAO.java</file>
         </group>
     </open-files>
 </project-private>
