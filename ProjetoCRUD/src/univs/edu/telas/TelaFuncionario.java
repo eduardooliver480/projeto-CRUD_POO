@@ -5,6 +5,7 @@
  */
 package univs.edu.telas;
 
+import javax.swing.JOptionPane;
 import univs.edu.funcionario.Funcionario;
 import univs.edu.funcionario.FuncionarioDAO;
 import univs.edu.usuario.Usuario;
@@ -26,6 +27,16 @@ public class TelaFuncionario extends javax.swing.JFrame {
         tfCPF.setText("");
         jcCargo.setSelectedItem("selecione");
        
+    }
+    
+    public void preencherFuncionario(){
+        tfNome.setText(funcionario.getNomeFuncionario());
+        tfCPF.setText(funcionario.getCpf());
+        tfSalario.setText(String.valueOf(funcionario.getSalario()));
+        tfUsuario.setText(funcionario.getUsuario().getLogin());
+        jcCargo.setSelectedItem(funcionario.getCargo());
+        
+        
     }
     public void carregarUsuario(Usuario usuario){
         funcionario.setUsuario(usuario);
@@ -158,8 +169,9 @@ public class TelaFuncionario extends javax.swing.JFrame {
           funcionario.setCpf(tfCPF.getText());
           funcionario.setNomeFuncionario(tfNome.getText());
           funcionario.setSalario(Double.parseDouble(tfSalario.getText()));
-          
-          
+          dao.salvar(funcionario);
+        }else{
+          JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
       }
     }//GEN-LAST:event_jButton4ActionPerformed
 
