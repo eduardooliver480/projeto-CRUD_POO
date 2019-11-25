@@ -5,22 +5,27 @@
  */
 package univs.edu.telas;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
+import univs.edu.funcionario.Funcionario;
+import univs.edu.funcionario.FuncionarioDAO;
 import univs.edu.usuario.Usuario;
 import univs.edu.usuario.UsuarioDAO;
 
 /**
  *
- * @author LABORATORIO 01
+ * @author adrianolimacandido
  */
 public class TelaAutenticacao extends javax.swing.JFrame {
 
-    Usuario usuario;
-    UsuarioDAO dao;
+    Funcionario funcionario;
+    FuncionarioDAO dao;
+    
     public TelaAutenticacao() {
         initComponents();
-        usuario = new Usuario();
-        dao = new UsuarioDAO();
+        funcionario = new Funcionario();
+        dao = new FuncionarioDAO();
     }
 
     /**
@@ -48,12 +53,6 @@ public class TelaAutenticacao extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel3.setText("Login.:");
 
-        tfLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tfLoginActionPerformed(evt);
-            }
-        });
-
         jLabel4.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel4.setText("Senha.:");
 
@@ -71,36 +70,32 @@ public class TelaAutenticacao extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(106, 106, 106)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(77, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(96, 96, 96)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(15, 15, 15)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(tfLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-                            .addComponent(tfSenha))))
-                .addContainerGap(101, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(jButton1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
-                .addGap(83, 83, 83))
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfSenha))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(tfLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(62, 62, 62))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(16, 16, 16)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(tfLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -108,32 +103,46 @@ public class TelaAutenticacao extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(tfSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
                     .addComponent(jButton2))
-                .addGap(56, 56, 56))
+                .addGap(17, 17, 17))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tfLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfLoginActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfLoginActionPerformed
-
+    
+    public Funcionario autenticarFunc(String login, String senha){
+        List<Funcionario> listaFuncionario = dao.listarFuncionarios();
+        
+        for (Funcionario funcionario1 : listaFuncionario) {
+            if(funcionario1.getUsuario().getLogin().equals(login)
+                    && funcionario1.getUsuario().getSenha().equals(senha)){
+                return funcionario1;
+            }
+        }
+        
+        return null;
+    }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        if(!tfLogin.getText().isEmpty() && !tfSenha.getText().isEmpty());
+        if(!tfLogin.getText().isEmpty() && !tfSenha.getText().isEmpty())
         {
-            usuario = dao.autenticarUsuario(tfLogin.getText(), tfSenha.getText());
-            if(usuario != null){
-                MenuPrincipal menu = new MenuPrincipal();
+            funcionario = autenticarFunc(tfLogin.getText(), 
+                    tfSenha.getText());
+            if(funcionario != null){
+                MenuPrincipal menu = new MenuPrincipal(funcionario);
                 menu.setVisible(true);
                 dispose();
             }else{
-                JOptionPane.showMessageDialog(null, "Dados Inválidos");
+                JOptionPane.showMessageDialog(null, "Dados Inválidos!");
             }
+            
         }
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

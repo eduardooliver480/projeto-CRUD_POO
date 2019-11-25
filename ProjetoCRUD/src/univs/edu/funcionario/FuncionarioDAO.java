@@ -1,6 +1,6 @@
 package univs.edu.funcionario;
 
-import java.util.ArrayList;
+import univs.edu.usuario.*;
 import java.util.List;
 import javax.swing.JOptionPane;
 import org.hibernate.Session;
@@ -17,14 +17,13 @@ public class FuncionarioDAO {
         sessao = HibernateUtil.
                 getSessionFactory().openSession();
         transacao = sessao.beginTransaction();
-       if(funcionario.getIdFuncionario()== 0){
+        if(funcionario.getIdFuncionario()== 0){
             sessao.save(funcionario);
-            JOptionPane.showMessageDialog(null, "Funcionário Cadastrado");
+            JOptionPane.showMessageDialog(null, "Funcionário Cadastrado!");
         }else{
             editar(funcionario);
-            JOptionPane.showMessageDialog(null, "Funcionário Cadastrado");
+            JOptionPane.showMessageDialog(null, "Funcionário Editado!");
         }
-        
         transacao.commit();
         sessao.close();
     }
@@ -58,8 +57,6 @@ public class FuncionarioDAO {
         sessao.close();
         return funcionario;
     }
-   
-       
     
     public List<Funcionario> listarFuncionarios(){
         sessao = HibernateUtil.
@@ -69,6 +66,20 @@ public class FuncionarioDAO {
                 createCriteria(Funcionario.class).list();
         sessao.close();
         return funcionarios;
+    }
+    
+    public Funcionario autenticarFuncionario(String login, String senha){
+        sessao = HibernateUtil.
+                getSessionFactory().openSession();
+        transacao = sessao.beginTransaction();
+        Funcionario funcionario = (Funcionario) sessao.
+                createCriteria(Funcionario.class)
+                .add(Restrictions.eq("usuario.login", login))
+                .add(Restrictions.eq("usuario.senha", senha))
+                .uniqueResult();
+        sessao.close();
+        
+        return funcionario != null ? funcionario : null;
     }
     
 }

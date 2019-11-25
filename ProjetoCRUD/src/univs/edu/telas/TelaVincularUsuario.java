@@ -35,9 +35,11 @@ public class TelaVincularUsuario extends javax.swing.JFrame {
                 new UsuarioTableModel(dao.listarUsuarios());
         tabelaUsuario.setModel(tm);
     }
-    public void vincularUsuario( Usuario usuario){
+    
+    public void vincularUsuario(Usuario usuario){
         tela.carregarUsuario(usuario);
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -98,58 +100,57 @@ public class TelaVincularUsuario extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 107, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(116, 116, 116))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btSelecionar)
-                        .addGap(103, 103, 103))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton4)
+                                .addGap(72, 72, 72)
+                                .addComponent(btSelecionar)))
+                        .addContainerGap(9, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 305, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btSelecionar)
-                    .addComponent(jButton4)))
+                    .addComponent(jButton4))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btSelecionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSelecionarActionPerformed
-       int linha = tabelaUsuario.getSelectedRow();
-       if(linha == -1){
-           JOptionPane.showMessageDialog(null, "selecione uma linha!");    
-      }else{
-           usuario = dao.pesquisar((int) tabelaUsuario.getValueAt(linha,0));
-           tela.carregarUsuario(usuario);
-           tela.setVisible(true);
-           dispose();
-           
-      }
+        int linha = tabelaUsuario.getSelectedRow();
+        if(linha == -1){
+            JOptionPane.showMessageDialog(null, "Selecione uma linha!");
+        }else{
+            usuario = dao.pesquisar((int) tabelaUsuario.getValueAt(linha, 0));
+            tela.carregarUsuario(usuario);
+            tela.setVisible(true);
+            dispose();
+        }
+        
     }//GEN-LAST:event_btSelecionarActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-       tela.setVisible(true);
-       dispose();
+        tela.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void tabelaUsuarioMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelaUsuarioMouseClicked
-       if(evt.getClickCount() == 2){
-           btSelecionarActionPerformed(null);
-           
-           
-       }
+        if(evt.getClickCount() == 2){
+            btSelecionarActionPerformed(null);
+        }
     }//GEN-LAST:event_tabelaUsuarioMouseClicked
 
     /**

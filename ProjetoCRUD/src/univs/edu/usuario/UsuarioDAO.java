@@ -16,7 +16,11 @@ public class UsuarioDAO {
         sessao = HibernateUtil.
                 getSessionFactory().openSession();
         transacao = sessao.beginTransaction();
-        sessao.save(usuario);
+        if(usuario.getIdUsuario() == 0){
+            sessao.save(usuario);
+        }else{
+            editar(usuario);
+        }
         transacao.commit();
         sessao.close();
     }
@@ -25,11 +29,7 @@ public class UsuarioDAO {
         sessao = HibernateUtil.
                 getSessionFactory().openSession();
         transacao = sessao.beginTransaction();
-        if(usuario.getIdUsuario()== 0){
-            sessao.save(usuario);
-        }else{
-            editar(usuario);
-        }
+        sessao.delete(usuario);
         transacao.commit();
         sessao.close();
     }
@@ -54,19 +54,19 @@ public class UsuarioDAO {
         sessao.close();
         return usuario;
     }
-    public Usuario autenticarUsuario(String login , String senha){
+    
+    public Usuario autenticarUsuario(String login, String senha){
         sessao = HibernateUtil.
                 getSessionFactory().openSession();
         transacao = sessao.beginTransaction();
         Usuario usuario = (Usuario) sessao.
                 createCriteria(Usuario.class)
                 .add(Restrictions.eq("login", login))
-                 .add(Restrictions.eq("senha", senha))
+                .add(Restrictions.eq("senha", senha))
                 .uniqueResult();
         sessao.close();
         
-        return usuario != null? usuario : null;
-        
+        return usuario != null ? usuario : null;
     }
     
     public List<Usuario> listarUsuarios(){
@@ -75,6 +75,18 @@ public class UsuarioDAO {
         transacao = sessao.beginTransaction();
         List<Usuario> usuarios = sessao.
                 createCriteria(Usuario.class).list();
+        sessao.close();
+        return usuarios;
+    }
+    
+    public List<Usuario> pesquisar(String campo, String valor){
+        sessao = HibernateUtil.
+                getSessionFactory().openSession();
+        transacao = sessao.beginTransaction();
+        List<Usuario> usuarios = sessao.
+                createCriteria(Usuario.class).
+                add(Restrictions.
+                        ilike(campo, "%"+valor+"%")).list();
         sessao.close();
         return usuarios;
     }
